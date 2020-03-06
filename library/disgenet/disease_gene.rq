@@ -1,13 +1,12 @@
 # @title Get UniProt IDs for a specific disease, e.g. C0751955 ("Brain Infarction")
+# @endpoint http://rdf.disgenet.org/sparql/
 # @param arg1=C0751955 
 
 PREFIX disgenet_source: <http://rdf.disgenet.org/v4.0.0/void/>
 PREFIX umls: <http://linkedlifedata.com/resource/umls/id/>
 
-SELECT DISTINCT ?gene ?score ?gene_label ?source
-# COUNT(DISTINCT ?gda)
-# ?gda
-# ?pmid ?description
+SELECT DISTINCT ?gene ?score ?gene_label ?source ?gda
+?pmid ?description
 WHERE {
     ?gda sio:SIO_000628 umls:{{arg1}} ,
                         ?gene ;
@@ -20,12 +19,6 @@ WHERE {
         ?gda sio:SIO_000772 ?pmid ;
              dct:description ?description .
     }
-    # VALUES (?source) { (<http://rdf.disgenet.org/v4.0.0/void/uniprot-2016>)
-    #                    (<http://rdf.disgenet.org/v4.0.0/void/ctd_human-2016>)
-    #                    (<http://rdf.disgenet.org/v4.0.0/void/clinvar-2016>)
-    #                    (<http://rdf.disgenet.org/v4.0.0/void/orphanet-2016>)
-    #                    (<http://rdf.disgenet.org/v4.0.0/void/gwascat-2016>) }
-    # FILTER regex(?source, "/(uniprot|ctd_human|clinvar|orphanet|gwascat)-")
 }
 ORDER BY DESC(?score) ?source ?pmid
 
