@@ -1,5 +1,7 @@
 # @title Regex seach for specific diseases that have gene-disease association information
-# @param arg1=alzheimer 
+# @endpoint http://rdf.disgenet.org/sparql/
+# @param pattern=alzheimer
+# @out ncit:C7067 xsd:string xsd:integer
 
 PREFIX umls: <http://linkedlifedata.com/resource/umls/id/>
 
@@ -10,7 +12,6 @@ WHERE {
     ?gene a ncit:C16612 .
     ?disease a ncit:C7057 ;
           dct:title ?disease_name
-    FILTER regex(?disease_name, "$arg1", "i")
+    FILTER regex(?disease_name, "{{pattern}}", "i")
 }
 ORDER BY DESC(?count)
-

@@ -1,4 +1,6 @@
 # @title Alzheimer's disease-related genes with curated evidences
+# @endpoint http://rdf.disgenet.org/sparql/
+# @prefix https://raw.githubusercontent.com/hchiba1/spang-library/master/prefix/bio
 
 PREFIX upid: <http://identifiers.org/uniprot/>
 PREFIX pmid: <http://identifiers.org/pubmed/>
@@ -12,7 +14,7 @@ WHERE {
          # up:organism ?tax ;
          sio:SIO_000253 ?source ;
          sio:SIO_000216/sio:SIO_000300 ?score .
-    FILTER regex(?source, "/(uniprot|ctd_human|clinvar|orphanet|gwascat)-")
+    # FILTER regex(?source, "/(uniprot|ctd_human|clinvar|orphanet|gwascat)-")
     ?gene a ncit:C16612 ;
           rdfs:label ?gene_label .
     ?disease a ncit:C7057 ;
